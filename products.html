@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - De Beers | Diamond Collections</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #d4af37;
+            --accent-color: #f8f9fa;
+            --text-dark: #333;
+            --text-light: #666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            padding-top: 80px;
+        }
+
+        .navbar {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary-color) !important;
+            text-decoration: none;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--secondary-color) !important;
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 5rem 0;
+            color: white;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .filter-section {
+            background: white;
+            padding: 2rem 0;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            margin: 0.25rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .products-section {
+            padding: 4rem 0;
+            background: var(--accent-color);
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-img-container {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.1);
+        }
+
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .overlay-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .overlay-btn {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .overlay-btn:hover {
+            background: #b8941f;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .product-content {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stars {
+            color: var(--secondary-color);
+            margin-right: 0.5rem;
+        }
+
+        .rating-text {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .new-badge {
+            background: #28a745;
+        }
+
+        .sale-badge {
+            background: #dc3545;
+        }
+
+        .collection-banner {
+            background: linear-gradient(135deg, var(--primary-color), #333);
+            color: white;
+            padding: 3rem 0;
+            margin: 3rem 0;
+            border-radius: 15px;
+        }
+
+        .collection-banner h3 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .collection-banner p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .testimonials {
+            background: white;
+            padding: 4rem 0;
+        }
+
+        .testimonial-card {
+            background: var(--accent-color);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            height: 100%;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--secondary-color);
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--secondary-color);
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .page-header p {
+                font-size: 1.1rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            .overlay-buttons {
+                flex-direction: column;
+            }
+
+            .filter-section {
+                position: static;
+                top: auto;
+            }
+
+            body {
+                padding-top: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">DE BEERS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Diamond Collections</h1>
+            <p>Discover timeless elegance in every piece</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="text-center">
+                <button class="filter-btn active" data-filter="all">All Products</button>
+                <button class="filter-btn" data-filter="engagement">Engagement Rings</button>
+                <button class="filter-btn" data-filter="wedding">Wedding Bands</button>
+                <button class="filter-btn" data-filter="necklaces">Necklaces</button>
+                <button class="filter-btn" data-filter="earrings">Earrings</button>
+                <button class="filter-btn" data-filter="bracelets">Bracelets</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="products-section">
+        <div class="container">
+            <div class="row g-4" id="products-grid">
+                
+                <div class="col-lg-4 col-md-6 product-item" data-category="engagement">
+                    <div class="product-card">
+                        <div class="product-badge new-badge">New</div>
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Classic Solitaire Ring" class="product-img">
+                            <div class="product-overlay">
+                                <div class="overlay-buttons">
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-eye"></i> View Details
+                                    </a>
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-heart"></i> Wishlist
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Classic Solitaire Ring</h4>
+                            <div class="product-price">From P5,200</div>
+                            <p class="product-description">Timeless elegance with a brilliant round diamond in a classic six-prong setting.</p>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-text">(127 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 product-item" data-category="engagement">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Vintage Halo Ring" class="product-img">
+                            <div class="product-overlay">
+                                <div class="overlay-buttons">
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-eye"></i> View Details
+                                    </a>
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-heart"></i> Wishlist
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Vintage Halo Ring</h4>
+                            <div class="product-price">From P7,800</div>
+                            <p class="product-description">Vintage-inspired design with intricate halo setting and milgrain details.</p>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-text">(89 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 product-item" data-category="engagement">
+                    <div class="product-card">
+                        <div class="product-badge sale-badge">Sale</div>
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Three Stone Ring" class="product-img">
+                            <div class="product-overlay">
+                                <div class="overlay-buttons">
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-eye"></i> View Details
+                                    </a>
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-heart"></i> Wishlist
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Three Stone Ring</h4>
+                            <div class="product-price">From P9,500</div>
+                            <p class="product-description">Symbolic trilogy design representing past, present, and future.</p>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-text">(64 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wedding Bands -->
+                <div class="col-lg-4 col-md-6 product-item" data-category="wedding">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Eternity Band" class="product-img">
+                            <div class="product-overlay">
+                                <div class="overlay-buttons">
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-eye"></i> View Details
+                                    </a>
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-heart"></i> Wishlist
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Diamond Eternity Band</h4>
+                            <div class="product-price">From P3,200</div>
+                            <p class="product-description">Continuous circle of diamonds symbolizing eternal love.</p>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-text">(203 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 product-item" data-category="wedding">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Classic Wedding Band" class="product-img">
+                            <div class="product-overlay">
+                                <div class="overlay-buttons">
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-eye"></i> View Details
+                                    </a>
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-heart"></i> Wishlist
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Classic Wedding Band</h4>
+                            <div class="product-price">From P1,800</div>
+                            <p class="product-description">Simple and elegant band crafted in premium platinum.</p>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-text">(156 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 product-item" data-category="necklaces">
+                    <div class="product-card">
+                        <div class="product-badge new-badge">New</div>
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Diamond Tennis Necklace" class="product-img">
+                            <div class="product-overlay">
+                                <div class="overlay-buttons">
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-eye"></i> View Details
+                                    </a>
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-heart"></i> Wishlist
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Diamond Tennis Necklace</h4>
+                            <div class="product-price">From P12,500</div>
+                            <p class="product-description">Elegant line of perfectly matched diamonds in a flexible setting.</p>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-text">(78 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 product-item" data-category="necklaces">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Solitaire Pendant" class="product-img">
+                            <div class="product-overlay">
+                                <div class="overlay-buttons">
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-eye"></i> View Details
+                                    </a>
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-heart"></i> Wishlist
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Solitaire Pendant</h4>
+                            <div class="product-price">From P4,200</div>
+                            <p class="product-description">Single diamond suspended on a delicate chain for everyday elegance.</p>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-text">(142 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Earrings -->
+                <div class="col-lg-4 col-md-6 product-item" data-category="earrings">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Diamond Studs" class="product-img">
+                            <div class="product-overlay">
+                                <div class="overlay-buttons">
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-eye"></i> View Details
+                                    </a>
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-heart"></i> Wishlist
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Classic Diamond Studs</h4>
+                            <div class="product-price">From P2,800</div>
+                            <p class="product-description">Timeless round diamonds in secure screw-back settings.</p>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-text">(321 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 product-item" data-category="earrings">
+                    <div class="product-card">
+                        <div class="product-badge sale-badge">Sale</div>
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Drop Earrings" class="product-img">
+                            <div class="product-overlay">
+                                <div class="overlay-buttons">
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-eye"></i> View Details
+                                    </a>
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-heart"></i> Wishlist
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Diamond Drop Earrings</h4>
+                            <div class="product-price">From P6,500</div>
+                            <p class="product-description">Elegant drops featuring cascading diamonds for special occasions.</p>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-text">(93 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 product-item" data-category="bracelets">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Tennis Bracelet" class="product-img">
+                            <div class="product-overlay">
+                                <div class="overlay-buttons">
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-eye"></i> View Details
+                                    </a>
+                                    <a href="#" class="overlay-btn">
+                                        <i class="fas fa-heart"></i> Wishlist
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h

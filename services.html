@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - De Beers | Diamond Expertise</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #d4af37;
+            --accent-color: #f8f9fa;
+            --text-dark: #333;
+            --text-light: #666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            padding-top: 80px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary-color) !important;
+            text-decoration: none;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--secondary-color) !important;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1573408301185-9146fe634ad0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 5rem 0;
+            color: white;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        /* Services Overview */
+        .services-overview {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .service-card {
+            background: var(--accent-color);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            height: 100%;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h4 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-service {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn-service:hover {
+            background: #b8941f;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        /* Detailed Services */
+        .detailed-services {
+            padding: 5rem 0;
+            background: var(--accent-color);
+        }
+
+        .service-detail {
+            margin-bottom: 4rem;
+        }
+
+        .service-detail:last-child {
+            margin-bottom: 0;
+        }
+
+        .service-detail-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-detail-img {
+            height: 300px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .service-detail-content {
+            padding: 2.5rem;
+        }
+
+        .service-detail h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            color: var(--text-light);
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .service-features li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+        }
+
+        /* Process Section */
+        .process-section {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .process-step {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .process-number {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+        }
+
+        .process-step h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Consultation CTA */
+        .consultation-cta {
+            background: linear-gradient(135deg, var(--primary-color), #333);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .consultation-cta h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .consultation-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn-consultation {
+            background: var(--secondary-color);
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .btn-consultation:hover {
+            background: #b8941f;
+            transform: translateY(-3px);
+            color: white;
+        }
+
+        .btn-consultation-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-consultation-outline:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 0;
+            background: var(--accent-color);
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            height: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .testimonial-rating {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .accordion-item {
+            border: none;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .accordion-button {
+            background: var(--accent-color);
+            color: var(--text-dark);
+            font-weight: 600;
+            border: none;
+            padding: 1.5rem;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .accordion-body {
+            padding: 1.5rem;
+            background: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--secondary-color);
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--secondary-color);
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .page-header p {
+                font-size: 1.1rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            .service-detail-content {
+                padding: 1.5rem;
+            }
+
+            .consultation-cta h2 {
+                font-size: 2rem;
+            }
+
+            body {
+                padding-top: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">DE BEERS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Services</h1>
+            <p>Expert guidance for your diamond journey</p>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="services-overview">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="display-4 fw-bold mb-3">Complete Diamond Services</h2>
+                    <p class="lead">From consultation to certification, we provide comprehensive expertise</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <i class="fas fa-search service-icon"></i>
+                        <h4>Diamond Consultation</h4>
+                        <p>Expert guidance to help you choose the perfect diamond for your needs and budget.</p>
+                        <a href="#consultation" class="btn-service">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <i class="fas fa-ring service-icon"></i>
+                        <h4>Custom Design</h4>
+                        <p>Create unique, personalized jewelry pieces with our master craftsmen.</p>
+                        <a href="#custom-design" class="btn-service">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <i class="fas fa-certificate service-icon"></i>
+                        <h4>Certification & Appraisal</h4>
+                        <p>Professional authentication and valuation services for your diamonds.</p>
+                        <a href="#certification" class="btn-service">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <i class="fas fa-tools service-icon"></i>
+                        <h4>Repair & Restoration</h4>
+                        <p>Expert repair services to restore your precious jewelry to its original beauty.</p>
+                        <a href="#repair" class="btn-service">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <i class="fas fa-shield-alt service-icon"></i>
+                        <h4>Insurance Services</h4>
+                        <p>Comprehensive insurance coverage and documentation for your valuable pieces.</p>
+                        <a href="#insurance" class="btn-service">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <i class="fas fa-sync service-icon"></i>
+                        <h4>Trade & Upgrade</h4>
+                        <p>Trade-in and upgrade programs to help you evolve your diamond collection.</p>
+                        <a href="#trade" class="btn-service">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Services -->
+    <section class="detailed-services">
+        <div class="container">
+            <!-- Diamond Consultation -->
+            <div class="service-detail" id="consultation">
+                <div class="service-detail-card">
+                    <div class="row g-0">
+                        <div class="col-lg-6">
+                            <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Diamond Consultation" class="service-detail-img">
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="service-detail-content">
+                                <h3>Diamond Consultation</h3>
+                                <p>Our diamond experts provide personalized consultations to help you understand the 4Cs (Cut, Color, Clarity, Carat) and select the perfect diamond for your special occasion.</p>
+                                <ul class="service-features">
+                                    <li>One-on-one consultation with certified gemologists</li>
+                                    <li>Education on diamond quality and characteristics</li>
+                                    <li>Budget planning and optimization</li>
+                                    <li>Comparison of different diamond options</li>
+                                    <li>Certificate explanation and verification</li>
+                                </ul>
+                                <a href="contact.html" class="btn-service">Schedule Consultation</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Design -->
+            <div class="service-detail" id="custom-design">
+                <div class="service-detail-card">
+                    <div class="row g-0">
+                        <div class="col-lg-6 order-lg-2">
+                            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Custom Design" class="service-detail-img">
+                        </div>
+                        <div class="col-lg-6 order-lg-1">
+                            <div class="service-detail-content">
+                                <h3>Custom Design</h3>
+                                <p>Transform your vision into reality with our bespoke jewelry design service. Our master craftsmen work with you to create unique pieces that reflect your personal style.</p>
+                                <ul class="service-features">
+                                    <li>Initial design consultation and sketching</li>
+                                    <li>3D modeling and CAD rendering</li>
+                                    <li>Metal and stone selection guidance</li>
+                                    <li>Handcrafted manufacturing process</li>
+                                    <li>Quality assurance and final inspection</li>
+                                </ul>
+                                <a href="contact.html" class="btn-service">Start Your Design</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certification & Appraisal -->
+            <div class="service-detail" id="certification">
+                <div class="service-detail-card">
+                    <div class="row g-0">
+                        <div class="col-lg-6">
+                            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Certification" class="service-detail-img">
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="service-detail-content">
+                                <h3>Certification & Appraisal</h3>
+                                <p>Ensure the authenticity and value of your diamonds with our professional certification and appraisal services performed by certified gemologists.</p>
+                                <ul class="service-features">
+                                    <li>GIA and AGS certification services</li>
+                                    <li>Insurance appraisal documentation</li>
+                                    <li>Estate jewelry evaluation</li>
+                                    <li>Detailed grading reports</li>
+                                    <li>Digital documentation and photography</li>
+                                </ul>
+                                <a href="contact.html" class="btn-service">Request Appraisal</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="display-4 fw-bold mb-3">Our Service Process</h2>
+                    <p class="lead">A seamless experience from consultation to completion</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="process-step">
+                        <div class="process-number">1</div>
+                        <h4>Initial Consultation</h4>
+                        <p>Meet with our experts to discuss your needs, preferences, and budget.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="process-step">
+                        <div class="process-number">2</div>
+                        <h4>Design & Planning</h4>
+                        <p>Create detailed plans and designs based on your requirements.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="process-step">
+                        <div class="process-number">3</div>
+                        <h4>Expert Execution</h4>
+                        <p>Our skilled craftsmen bring your vision to life with precision and care.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="process-step">
+                        <div class="process-number">4</div>
+                        <h4>Final Delivery</h4>
+                        <p>Receive your finished piece with complete documentation and certification.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Consultation CTA -->
+    <section class="consultation-cta">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Ready to Begin Your Diamond Journey?</h2>
+                    <p>Schedule a consultation with our diamond experts today</p>
+                    <a href="contact.html" class="btn-consultation">Book Consultation</a>
+                    <a href="tel:+442074045020" class="btn-consultation btn-consultation-outline">Call Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="display-4 fw-bold mb-3">What Our Clients Say</h2>
+                    <p class="lead">Experience the exceptional service that sets us apart</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" 
+                             alt="Sarah Johnson" class="testimonial-img">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"The custom design process was incredible. They turned my vision into the most beautiful engagement ring I could have imagined."</p>
+                        <div class="testimonial-author">Sarah Johnson</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" 
+                             alt="Michael Chen" class="testimonial-img">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Professional, knowledgeable, and trustworthy. The consultation helped me understand diamonds and make the perfect choice."</p>
+                        <div class="testimonial-author">Michael Chen</div>
+                    </div>
+              
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="display-4 fw-bold mb-3">Frequently Asked Questions</h2>
+                    <p class="lead">Common questions about our services</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    How long does a custom design take?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Custom designs typically take 4-6 weeks from initial consultation to completion. Complex pieces may require additional time. We'll provide a detailed timeline during your consultation.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Do you provide certificates for all diamonds?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, all our diamonds come with certificates from recognized gemological institutes such as GIA, AGS, or our own certified gemologists for smaller stones.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    What is your repair policy?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We offer complimentary cleaning and inspection for all De Beers jewelry. Repair costs depend on the complexity of work needed. We provide detailed estimates before beginning any repair work.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    Can I upgrade my diamond later?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, we offer upgrade programs for diamonds purchased from De Beers. Your original diamond can be traded towards a larger or higher quality stone with fair market value assessment.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="
